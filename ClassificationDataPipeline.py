@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, MinMaxScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.neighbors import KNeighborsRegressor
@@ -27,7 +27,7 @@ def train_and_evaluate_models(df: pd.DataFrame, target_column: str, randomstate:
         ])
 
     models = {
-        "KNN": KNeighborsRegressor(),
+        "KNN": KNeighborsRegressor(n_neighbors=2),
         "Random Forest": RandomForestRegressor(),
         "Gradient Boosting": GradientBoostingRegressor(),
         "AdaBoost": AdaBoostRegressor(),

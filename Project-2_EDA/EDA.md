@@ -29,8 +29,8 @@ The goal or questions we aim to answer, gleened from our intial review of the co
 
      o  Determine the best model configurations to predict price
      o  Determine the best model configurations to predict a rating
-     o  Ultimately, using our model(s) here, restaurants wishing to serve Spanish wines can gleen an understanding on price vs. rating 
-          when selecting wines for their inventory.   
+     o  Through iterative means, can model scores be improved, i.e. using different scalers? 
+     o  Ultimately, using our model(s) here, restaurants wishing to serve Spanish wines can gleen an understanding on price vs. rating when selecting wines for their inventory.   
  
      
 Our first attempt at answering the above has revealed the following and provided the confidence we needed to ultimately select this dataset.  This forms our basis to improve on these numbers.

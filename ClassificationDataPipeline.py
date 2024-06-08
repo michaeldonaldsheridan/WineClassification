@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, MinMaxScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.neighbors import KNeighborsRegressor
@@ -8,6 +8,8 @@ from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, A
 from sklearn.svm import SVR
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
+import numpy as np
+import matplotlib.pyplot as plt
 
 def train_and_evaluate_models(df: pd.DataFrame, target_column: str, randomstate: int):
     df = df.dropna()
@@ -25,7 +27,7 @@ def train_and_evaluate_models(df: pd.DataFrame, target_column: str, randomstate:
         ])
 
     models = {
-        "KNN": KNeighborsRegressor(),
+        "KNN": KNeighborsRegressor(n_neighbors=2),
         "Random Forest": RandomForestRegressor(),
         "Gradient Boosting": GradientBoostingRegressor(),
         "AdaBoost": AdaBoostRegressor(),
@@ -81,12 +83,15 @@ def train_and_evaluate_models(df: pd.DataFrame, target_column: str, randomstate:
         print(f'{model_name} - Testing Score: {test_score:.4f}, R² Score: {test_r2:.4f}, MSE: {test_mse:.4f}')
         print('-' * 50)
 
+        
     print('Final Accuracy, R², and MSE Scores:')
     for key in accuracy_scores:
         print(f"{key.capitalize()} Scores:")
         for model_name, score in accuracy_scores[key].items():
             print(f"  {model_name}: Accuracy Score: {score:.4f}, R² Score: {r2_scores[key][model_name]:.4f}, MSE: {mse_scores[key][model_name]:.4f}")
         print()
+    
+
 
     return accuracy_scores, r2_scores, mse_scores
 
@@ -96,10 +101,24 @@ def train_and_evaluate_models(df: pd.DataFrame, target_column: str, randomstate:
 # randomstate = 42
 # accuracy_scores, r2_scores, mse_scores = train_and_evaluate_models(df, target_column, randomstate)
 
-# df = pd.read_csv('wines_SPA.csv')
-# target_column = 'rating'
-# randomstate = 50
-# accuracy_scores, r2_scores, mse_scores = train_and_evaluate_models(df, target_column, randomstate)
-# print(accuracy_scores)
-# print(r2_scores)
-# print(mse_scores)
+#df = pd.read_csv('wines_SPA.csv')
+#target_column = 'rating'
+#randomstate = 50
+#accuracy_scores, r2_scores, mse_scores = train_and_evaluate_models(df, target_column, randomstate)
+#print(accuracy_scores)
+#print(r2_scores)
+#print(mse_scores)
+
+#Example usage
+#df = pd.read_csv('your_data.csv')
+#target_column = 'your_target_column'
+#randomstate = 42
+#accuracy_scores, r2_scores, mse_scores = train_and_evaluate_models(df, target_column, randomstate)
+
+df = pd.read_csv('wines_SPA.csv')
+target_column = 'rating'
+randomstate = 50
+accuracy_scores, r2_scores, mse_scores = train_and_evaluate_models(df, target_column, randomstate)
+print(accuracy_scores)
+print(r2_scores)
+print(mse_scores)
